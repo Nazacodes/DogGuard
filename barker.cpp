@@ -1,18 +1,13 @@
-const int micPin = A0;    // Microphone analog output pin
-const int threshold = 500; // Threshold for noise level
+const int micPin = A0;  // Connect the microphone to analog pin A0
+int micValue = 0;
 
 void setup() {
-  Serial.begin(115200);  // Start serial communication
+  Serial.begin(9600);  // Start serial communication
 }
 
 void loop() {
-  int micValue = analogRead(micPin);  // Read the analog value from the microphone
-  Serial.println(micValue);  // Print the value to the Serial Monitor
-
-  if (micValue > threshold) {
-    // If the noise level exceeds the threshold, print "Loud noise detected!"
-    Serial.println("Loud noise detected!");
-  }
-
-  delay(200);  // Short delay for readability
+  micValue = analogRead(micPin);  // Read the microphone signal
+  Serial.println(micValue);  // Print the microphone value to Serial Monitor
+  
+  delay(100);  // Delay for a short time
 }
