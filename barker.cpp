@@ -1,25 +1,18 @@
-
-const int micPin = A0; // Microphone input pin (analog)
-const int speakerPin = 9; // Pin connected to the speaker/buzzer
-const int noiseThreshold = 600; // Set threshold for noise level (adjust as necessary)
+const int micPin = A0;    // Microphone analog output pin
+const int threshold = 500; // Threshold for noise level
 
 void setup() {
-  Serial.begin(115200);  // Start serial communication for debugging
-  pinMode(speakerPin, OUTPUT);  // Set the speaker pin as an output
+  Serial.begin(115200);  // Start serial communication
 }
 
 void loop() {
-  int micValue = analogRead(micPin); // Read microphone value
+  int micValue = analogRead(micPin);  // Read the analog value from the microphone
+  Serial.println(micValue);  // Print the value to the Serial Monitor
 
-  // Print the mic value to the Serial Monitor for debugging
-  Serial.println(micValue);
-
-  // If noise level exceeds threshold, activate the speaker
-  if (micValue > noiseThreshold) {
-    tone(speakerPin, 1000); // Play a 1kHz tone (adjust frequency as needed)
-  } else {
-    noTone(speakerPin); // Stop playing the tone if noise level is low
+  if (micValue > threshold) {
+    // If the noise level exceeds the threshold, print "Loud noise detected!"
+    Serial.println("Loud noise detected!");
   }
 
-  delay(100); // Delay to avoid overwhelming the serial output
+  delay(200);  // Short delay for readability
 }
